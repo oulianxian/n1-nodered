@@ -320,20 +320,20 @@
         "id": "075b4488f59cfff3",
         "type": "inject",
         "z": "e5e3e2f41f601ea5",
-        "name": "08:00",
+        "name": "清空缓存",
         "props": [
             {
                 "p": "payload"
             }
         ],
         "repeat": "",
-        "crontab": "00 08 * * *",
+        "crontab": "",
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 390,
+        "x": 380,
         "y": 200,
         "wires": [
             [
@@ -353,7 +353,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 600,
+        "x": 580,
         "y": 200,
         "wires": [
             []
