@@ -315,5 +315,48 @@
                 "b0f2591c3d9ede28"
             ]
         ]
+    },
+    {
+        "id": "075b4488f59cfff3",
+        "type": "inject",
+        "z": "e5e3e2f41f601ea5",
+        "name": "08:00",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "00 08 * * *",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 390,
+        "y": 200,
+        "wires": [
+            [
+                "1488c5bd7f86df6d"
+            ]
+        ]
+    },
+    {
+        "id": "1488c5bd7f86df6d",
+        "type": "function",
+        "z": "e5e3e2f41f601ea5",
+        "name": "清空缓存",
+        "func": "     global.set(\"oldIp\",null)\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 600,
+        "y": 200,
+        "wires": [
+            []
+        ]
     }
 ]
