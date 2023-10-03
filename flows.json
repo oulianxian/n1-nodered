@@ -1,1 +1,232 @@
-[]
+[
+    {
+        "id": "e5e3e2f41f601ea5",
+        "type": "tab",
+        "label": "流程 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "da4b299650574db6",
+        "type": "inject",
+        "z": "e5e3e2f41f601ea5",
+        "name": "08:00",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "00 08 * * *",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 370,
+        "y": 180,
+        "wires": [
+            [
+                "05b0c91299e41ab5"
+            ]
+        ]
+    },
+    {
+        "id": "05b0c91299e41ab5",
+        "type": "http request",
+        "z": "e5e3e2f41f601ea5",
+        "name": "获取ip",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://ip.3322.net/",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 540,
+        "y": 180,
+        "wires": [
+            [
+                "d9a597f6169e0a30",
+                "f345549e3a82608a"
+            ]
+        ]
+    },
+    {
+        "id": "f345549e3a82608a",
+        "type": "function",
+        "z": "e5e3e2f41f601ea5",
+        "name": "判断是否变化",
+        "func": "msg.newIp=msg.payload\nmsg.oldIp=global.get(\"oldIp\")\nmsg.needChange=msg.newIp!=msg.oldIp\n\nmsg.addUrl=\"http://op.xiequ.cn/IpWhiteList.aspx?uid=124719&ukey=DB5C3A04ADCDF68069A144185093F580&act=add&ip=\"+msg.newIp\nif(msg.needChange){\n    global.set(\"oldIp\",msg.newIp)\n}\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 740,
+        "y": 180,
+        "wires": [
+            [
+                "045d83b37425fab4"
+            ]
+        ]
+    },
+    {
+        "id": "045d83b37425fab4",
+        "type": "switch",
+        "z": "e5e3e2f41f601ea5",
+        "name": "是否需要更新白名单",
+        "property": "needChange",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "true"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 940,
+        "y": 180,
+        "wires": [
+            [
+                "23b0c95108ab8b13"
+            ]
+        ]
+    },
+    {
+        "id": "23b0c95108ab8b13",
+        "type": "http request",
+        "z": "e5e3e2f41f601ea5",
+        "name": "清空白名单",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://op.xiequ.cn/IpWhiteList.aspx?uid=124719&ukey=DB5C3A04ADCDF68069A144185093F580&act=del&ip=all",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 1170,
+        "y": 180,
+        "wires": [
+            [
+                "e505743853072d43",
+                "6c60148dd3cacfca"
+            ]
+        ]
+    },
+    {
+        "id": "ad018801d6c25664",
+        "type": "inject",
+        "z": "e5e3e2f41f601ea5",
+        "name": "20:00",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "00 20 * * *",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 370,
+        "y": 240,
+        "wires": [
+            [
+                "05b0c91299e41ab5"
+            ]
+        ]
+    },
+    {
+        "id": "e505743853072d43",
+        "type": "http request",
+        "z": "e5e3e2f41f601ea5",
+        "name": "新增白名单",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "{{{addUrl}}}",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 1350,
+        "y": 180,
+        "wires": [
+            [
+                "09f6b9d63ca5fa79"
+            ]
+        ]
+    },
+    {
+        "id": "d9a597f6169e0a30",
+        "type": "debug",
+        "z": "e5e3e2f41f601ea5",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 720,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "6c60148dd3cacfca",
+        "type": "debug",
+        "z": "e5e3e2f41f601ea5",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1320,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "09f6b9d63ca5fa79",
+        "type": "debug",
+        "z": "e5e3e2f41f601ea5",
+        "name": "debug 3",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1500,
+        "y": 180,
+        "wires": []
+    }
+]
