@@ -24,104 +24,11 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 370,
-        "y": 180,
+        "x": 390,
+        "y": 340,
         "wires": [
             [
-                "05b0c91299e41ab5"
-            ]
-        ]
-    },
-    {
-        "id": "05b0c91299e41ab5",
-        "type": "http request",
-        "z": "e5e3e2f41f601ea5",
-        "name": "获取ip",
-        "method": "GET",
-        "ret": "txt",
-        "paytoqs": "ignore",
-        "url": "http://ip.3322.net/",
-        "tls": "",
-        "persist": false,
-        "proxy": "",
-        "insecureHTTPParser": false,
-        "authType": "",
-        "senderr": false,
-        "headers": [],
-        "x": 540,
-        "y": 180,
-        "wires": [
-            [
-                "d9a597f6169e0a30",
-                "f345549e3a82608a"
-            ]
-        ]
-    },
-    {
-        "id": "f345549e3a82608a",
-        "type": "function",
-        "z": "e5e3e2f41f601ea5",
-        "name": "判断是否变化",
-        "func": "msg.newIp=msg.payload\nmsg.oldIp=global.get(\"oldIp\")\nmsg.needChange=msg.newIp!=msg.oldIp\nmsg.cleanOldIpUrl=\"http://op.xiequ.cn/IpWhiteList.aspx?uid=124719&ukey=DB5C3A04ADCDF68069A144185093F580&act=del&ip=\"+msg.oldIp\nmsg.addUrl=\"http://op.xiequ.cn/IpWhiteList.aspx?uid=124719&ukey=DB5C3A04ADCDF68069A144185093F580&act=add&ip=\"+msg.newIp\nif(msg.needChange){\n    global.set(\"oldIp\",msg.newIp)\n}\n\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 740,
-        "y": 180,
-        "wires": [
-            [
-                "045d83b37425fab4"
-            ]
-        ]
-    },
-    {
-        "id": "045d83b37425fab4",
-        "type": "switch",
-        "z": "e5e3e2f41f601ea5",
-        "name": "是否需要更新白名单",
-        "property": "needChange",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "true"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 1,
-        "x": 940,
-        "y": 180,
-        "wires": [
-            [
-                "23b0c95108ab8b13"
-            ]
-        ]
-    },
-    {
-        "id": "23b0c95108ab8b13",
-        "type": "http request",
-        "z": "e5e3e2f41f601ea5",
-        "name": "清空白名单",
-        "method": "GET",
-        "ret": "txt",
-        "paytoqs": "ignore",
-        "url": "{{{cleanOldIpUrl}}}",
-        "tls": "",
-        "persist": false,
-        "proxy": "",
-        "insecureHTTPParser": false,
-        "authType": "",
-        "senderr": false,
-        "headers": [],
-        "x": 1170,
-        "y": 180,
-        "wires": [
-            [
-                "e505743853072d43",
-                "6c60148dd3cacfca"
+                "b1aed064b1f2ef10"
             ]
         ]
     },
@@ -146,16 +53,109 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 370,
-        "y": 240,
+        "x": 390,
+        "y": 380,
         "wires": [
             [
-                "05b0c91299e41ab5"
+                "b1aed064b1f2ef10"
             ]
         ]
     },
     {
-        "id": "e505743853072d43",
+        "id": "b1aed064b1f2ef10",
+        "type": "http request",
+        "z": "e5e3e2f41f601ea5",
+        "name": "获取ip",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://ip.3322.net/",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 610,
+        "y": 360,
+        "wires": [
+            [
+                "bd47cab63e3148f5",
+                "bdf692598fb5b950"
+            ]
+        ]
+    },
+    {
+        "id": "bdf692598fb5b950",
+        "type": "function",
+        "z": "e5e3e2f41f601ea5",
+        "name": "判断是否变化",
+        "func": "msg.newIp=msg.payload\nmsg.oldIp=global.get(\"oldIp\")\nmsg.needChange=msg.newIp!=msg.oldIp\nmsg.cleanOldIpUrl=\"http://op.xiequ.cn/IpWhiteList.aspx?uid=124719&ukey=DB5C3A04ADCDF68069A144185093F580&act=del&ip=\"+msg.oldIp\nmsg.addUrl=\"http://op.xiequ.cn/IpWhiteList.aspx?uid=124719&ukey=DB5C3A04ADCDF68069A144185093F580&act=add&ip=\"+msg.newIp\nif(msg.needChange){\n    global.set(\"oldIp\",msg.newIp)\n}\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 810,
+        "y": 360,
+        "wires": [
+            [
+                "0bfe39fb76dc9249"
+            ]
+        ]
+    },
+    {
+        "id": "0bfe39fb76dc9249",
+        "type": "switch",
+        "z": "e5e3e2f41f601ea5",
+        "name": "是否需要更新白名单",
+        "property": "needChange",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "true"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 1010,
+        "y": 360,
+        "wires": [
+            [
+                "6ebb97b1d1fb9863"
+            ]
+        ]
+    },
+    {
+        "id": "6ebb97b1d1fb9863",
+        "type": "http request",
+        "z": "e5e3e2f41f601ea5",
+        "name": "清空白名单",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "{{{cleanOldIpUrl}}}",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 1240,
+        "y": 360,
+        "wires": [
+            [
+                "cadfad2d2ac2389e",
+                "6dfda9f6bd5e4b63"
+            ]
+        ]
+    },
+    {
+        "id": "cadfad2d2ac2389e",
         "type": "http request",
         "z": "e5e3e2f41f601ea5",
         "name": "新增白名单",
@@ -170,16 +170,16 @@
         "authType": "",
         "senderr": false,
         "headers": [],
-        "x": 1350,
-        "y": 180,
+        "x": 1420,
+        "y": 360,
         "wires": [
             [
-                "09f6b9d63ca5fa79"
+                "17d7e3bfc1fdfe01"
             ]
         ]
     },
     {
-        "id": "d9a597f6169e0a30",
+        "id": "bd47cab63e3148f5",
         "type": "debug",
         "z": "e5e3e2f41f601ea5",
         "name": "debug 1",
@@ -191,12 +191,12 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 720,
-        "y": 120,
+        "x": 790,
+        "y": 300,
         "wires": []
     },
     {
-        "id": "6c60148dd3cacfca",
+        "id": "6dfda9f6bd5e4b63",
         "type": "debug",
         "z": "e5e3e2f41f601ea5",
         "name": "debug 2",
@@ -208,16 +208,16 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1220,
-        "y": 80,
+        "x": 1390,
+        "y": 300,
         "wires": []
     },
     {
-        "id": "09f6b9d63ca5fa79",
+        "id": "17d7e3bfc1fdfe01",
         "type": "debug",
         "z": "e5e3e2f41f601ea5",
         "name": "debug 3",
-        "active": false,
+        "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -225,8 +225,95 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1500,
-        "y": 180,
+        "x": 1570,
+        "y": 360,
         "wires": []
+    },
+    {
+        "id": "c6fa6a03303b655e",
+        "type": "inject",
+        "z": "e5e3e2f41f601ea5",
+        "name": "更新为120.235.162.2",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "120.235.162.2",
+        "payloadType": "str",
+        "x": 710,
+        "y": 420,
+        "wires": [
+            [
+                "b0f2591c3d9ede28"
+            ]
+        ]
+    },
+    {
+        "id": "b0f2591c3d9ede28",
+        "type": "function",
+        "z": "e5e3e2f41f601ea5",
+        "name": "判断是否变化",
+        "func": "msg.newIp =msg.payload\nmsg.oldIp=global.get(\"oldIp\")\nmsg.needChange=msg.newIp!=msg.oldIp\nmsg.cleanOldIpUrl=\"http://op.xiequ.cn/IpWhiteList.aspx?uid=124719&ukey=DB5C3A04ADCDF68069A144185093F580&act=del&ip=\"+msg.oldIp\nmsg.addUrl=\"http://op.xiequ.cn/IpWhiteList.aspx?uid=124719&ukey=DB5C3A04ADCDF68069A144185093F580&act=add&ip=\"+msg.newIp\nif(msg.needChange){\n    global.set(\"oldIp\",msg.newIp)\n}\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 970,
+        "y": 440,
+        "wires": [
+            [
+                "6ebb97b1d1fb9863"
+            ]
+        ]
+    },
+    {
+        "id": "4363a77eaa2b8061",
+        "type": "debug",
+        "z": "e5e3e2f41f601ea5",
+        "name": "debug 88",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 970,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "e91e03921b37d1a4",
+        "type": "inject",
+        "z": "e5e3e2f41f601ea5",
+        "name": "更新为120.235.162.1",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "120.235.162.1",
+        "payloadType": "str",
+        "x": 710,
+        "y": 460,
+        "wires": [
+            [
+                "b0f2591c3d9ede28"
+            ]
+        ]
     }
 ]
